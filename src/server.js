@@ -3,6 +3,8 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import path from 'path';
 import morgan from 'morgan';
+import mongoose from 'mongoose';
+import apiRouter from './router';
 
 // initialize
 const app = express();
@@ -26,15 +28,27 @@ app.set('views', path.join(__dirname, '../src/views'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+// REGISTER OUR ROUTES -------------------------------
+// all of our routes will be prefixed with /api
+// this should go AFTER body parser
+app.use('/api', apiRouter);
+
 
 // default index route
 app.get('/', (req, res) => {
   res.send('hi');
 });
 
+// DB Setup
+const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost/blog';
+mongoose.connect(mongoURI);
+// set mongoose promises to es6 default
+mongoose.Promise = global.Promise;
+
 // START THE SERVER
 // =============================================================================
 const port = process.env.PORT || 9090;
+// const port = process.env.PORT || 9090;
 app.listen(port);
 
 console.log(`listening on: ${port}`);
