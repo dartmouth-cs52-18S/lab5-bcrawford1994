@@ -7,6 +7,7 @@ export const createPost = (req, res) => {
   post.tags = req.body.tags;
   post.content = req.body.content;
   post.cover_url = req.body.cover_url;
+  post.author = req.body.author;
   console.log('here: ', post);
   return post.save()
     .then((result) => {
@@ -65,19 +66,11 @@ export const updatePost = (req, res) => {
       result.tags = req.body.tags;
       result.content = req.body.content;
       result.cover_url = req.body.cover_url;
+      result.author = req.body.author;
       res.json({ message: 'Post Updated!' });
       return result.save();
     })
     .catch((error) => {
       res.status(500).json({ error });
     });
-  /*
-  return post.save()
-    .then((result) => {
-      res.json({ message: 'Post updated!' });
-    })
-    .catch((error) => {
-      res.status(500).json({ error });
-    });
-    */
 };
