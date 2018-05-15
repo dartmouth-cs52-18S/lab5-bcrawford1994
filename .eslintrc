@@ -18,11 +18,14 @@
     arrow-body-style: ["error", "always"],
     no-shadow: ["error", { "allow": ["done", "res", "cb", "err", "resolve", "reject"] }],
     no-use-before-define: ["error", { "functions": false }],
+    consistent-return: 0,
     max-len: 0,
+    prefer-destructuring: 0,
+    func-names: 0,
+    new-cap: 0,
     no-param-reassign: 0
   },
   plugins: [
     'import'
   ]
 }
-
